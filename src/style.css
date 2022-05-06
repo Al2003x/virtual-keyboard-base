@@ -373,7 +373,6 @@ body {
 }
 
 p {
-  max-width: 750px;
   text-align: center;
   font-size: 1.2rem;
   line-height: 1.9rem;
@@ -400,8 +399,8 @@ button {
   vertical-align: bottom;
   margin: 0.4vw;
   padding: 1.6vw 2vw 1.8vw;
-  min-width: 4vw;
-  min-height: 3vw;
+  min-width: 50px;
+  min-height: 50px;
   font-size: 1.2rem;
   line-height: 1.2rem;
   background-color: #525252;
@@ -431,7 +430,6 @@ button.active {
 .win {
   padding: 0 5px;
   text-transform: lowercase;
-  letter-spacing: 0.05rem;
 }
 
 .enter,

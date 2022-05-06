@@ -537,9 +537,6 @@ window.onload = () => {
   textarea.focus();
 
   // Create and add keyboard to document
-  const keyboardView = document.createElement('div');
-  keyboardView.classList.add('keyboard');
-  document.body.append(keyboardView);
   const keyboard = new Keyboard();
   document.body.append(keyboard);
 };
