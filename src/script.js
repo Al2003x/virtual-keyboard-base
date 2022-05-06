@@ -1,6 +1,6 @@
-const layout = {};
+const Layout = {};
 
-layout.english = {
+Layout.english = {
   general: [
     [
       '`',
@@ -18,23 +18,7 @@ layout.english = {
       '=',
       'backspace',
     ],
-    [
-      'tab',
-      'q',
-      'w',
-      'e',
-      'r',
-      't',
-      'y',
-      'u',
-      'i',
-      'o',
-      'p',
-      '[',
-      ']',
-      '&#92;',
-      'del',
-    ],
+    ['tab', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']'],
     [
       'capslock',
       'a',
@@ -65,7 +49,18 @@ layout.english = {
       '&uarr;',
       'shift',
     ],
-    ['ctrl', 'Win', 'Alt', 'space', 'Alt', 'ctrl', '&larr;', '&darr;', '&rarr;'],
+    [
+      'ctrl',
+      'win',
+      'alt',
+      'space',
+      'alt',
+      'win',
+      'ctrl',
+      '&larr;',
+      '&darr;',
+      '&rarr;',
+    ],
   ],
   capsLockPressed: [
     [
@@ -84,7 +79,7 @@ layout.english = {
       '=',
       'backspace',
     ],
-    ['tab', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '[', ']', 'del'],
+    ['tab', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '[', ']'],
     [
       'capslock',
       'A',
@@ -116,7 +111,18 @@ layout.english = {
       '&uarr;',
       'shift',
     ],
-    ['ctrl', 'Win', 'Alt', 'space', 'Alt', 'ctrl', '&larr;', '&darr;', '&rarr;'],
+    [
+      'ctrl',
+      'win',
+      'alt',
+      'space',
+      'alt',
+      'win',
+      'ctrl',
+      '&larr;',
+      '&darr;',
+      '&rarr;',
+    ],
   ],
   shiftPressed: [
     [
@@ -135,7 +141,7 @@ layout.english = {
       '+',
       'backspace',
     ],
-    ['tab', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '{', '}', 'del'],
+    ['tab', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '{', '}'],
     [
       'capslock',
       'A',
@@ -167,11 +173,22 @@ layout.english = {
       '&uarr;',
       'shift',
     ],
-    ['ctrl', 'Win', 'Alt', 'space', 'Alt', 'ctrl', '&larr;', '&darr;', '&rarr;'],
+    [
+      'ctrl',
+      'win',
+      'alt',
+      'space',
+      'alt',
+      'win',
+      'ctrl',
+      '&larr;',
+      '&darr;',
+      '&rarr;',
+    ],
   ],
 };
 
-layout.russian = {
+Layout.russian = {
   general: [
     [
       'ё',
@@ -189,7 +206,7 @@ layout.russian = {
       '=',
       'backspace',
     ],
-    ['tab', 'й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ', 'del'],
+    ['tab', 'й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ'],
     [
       'capslock',
       'ф',
@@ -221,7 +238,18 @@ layout.russian = {
       '&uarr;',
       'shift',
     ],
-    ['ctrl', 'Win', 'alt', 'space', 'alt', 'ctrl', '&larr;', '&darr;', '&rarr;'],
+    [
+      'ctrl',
+      'win',
+      'alt',
+      'space',
+      'alt',
+      'win',
+      'ctrl',
+      '&larr;',
+      '&darr;',
+      '&rarr;',
+    ],
   ],
   capsLockPressed: [
     [
@@ -240,7 +268,7 @@ layout.russian = {
       '=',
       'backspace',
     ],
-    ['tab', 'Й', 'Ц', 'У', 'К', 'Е', 'Н', 'Г', 'Ш', 'Щ', 'З', 'Х', 'Ъ', 'del'],
+    ['tab', 'Й', 'Ц', 'У', 'К', 'Е', 'Н', 'Г', 'Ш', 'Щ', 'З', 'Х', 'Ъ'],
     [
       'capslock',
       'Ф',
@@ -272,7 +300,18 @@ layout.russian = {
       '&uarr;',
       'shift',
     ],
-    ['ctrl', 'Win', 'alt', 'space', 'alt', 'ctrl', '&larr;', '&darr;', '&rarr;'],
+    [
+      'ctrl',
+      'win',
+      'alt',
+      'space',
+      'alt',
+      'win',
+      'ctrl',
+      '&larr;',
+      '&darr;',
+      '&rarr;',
+    ],
   ],
   shiftPressed: [
     [
@@ -291,7 +330,7 @@ layout.russian = {
       '+',
       'backspace',
     ],
-    ['tab', 'Й', 'Ц', 'У', 'К', 'Е', 'Н', 'Г', 'Ш', 'Щ', 'З', 'Х', 'Ъ', 'del'],
+    ['tab', 'Й', 'Ц', 'У', 'К', 'Е', 'Н', 'Г', 'Ш', 'Щ', 'З', 'Х', 'Ъ'],
     [
       'capslock',
       'Ф',
@@ -323,20 +362,30 @@ layout.russian = {
       '&uarr;',
       'shift',
     ],
-    ['ctrl', 'Win', 'alt', 'space', 'alt', 'ctrl', '&larr;', '&darr;', '&rarr;'],
+    [
+      'ctrl',
+      'win',
+      'alt',
+      'space',
+      'alt',
+      'win',
+      'ctrl',
+      '&larr;',
+      '&darr;',
+      '&rarr;',
+    ],
   ],
 };
 
-const specialKeys = [
+const SpecialKeys = [
   'tab',
   'backspace',
-  'del',
   'capslock',
   'enter',
   'shift',
   'ctrl',
   'alt',
-  'Win',
+  'win',
   'space',
   '&uarr;',
   '&larr;',
@@ -344,7 +393,7 @@ const specialKeys = [
   '&rarr;',
 ];
 
-const doubleKeys = ['shift', 'alt', 'Win'];
+const doubledKeys = ['shift', 'alt', 'win'];
 
 const language = 'english';
 /* const optPressed = false;
@@ -353,22 +402,24 @@ const capsLockPressed = false; */
 
 class Keyboard {
   constructor() {
-    this.layout = layout;
+    this.layout = Layout;
     this.language = language;
-    this.createKeyboard();
+    this.specialKeys = SpecialKeys;
+    return this.createKeyboard();
   }
 
   createKeyboard() {
     const keyboard = document.createElement('div');
     keyboard.classList.add('keyboard');
     const currentLayout = this.layout[language].general;
-    this.createButtonsRows(currentLayout, keyboard);
+    this.createButtons(currentLayout, keyboard);
     this.nameDoubledButtons(keyboard);
-    this.addButtonsAnimation(keyboard);
+    this.addClickActions(keyboard);
+    this.addMouseActions(keyboard);
     return keyboard;
   }
 
-  createButtonsRows(array, keyboard) {
+  createButtons(array, keyboard) {
     array.forEach((arrayRow) => {
       const nodesRow = document.createElement('div');
       nodesRow.classList.add('keyboard__row');
@@ -381,32 +432,34 @@ class Keyboard {
     arrayRow.forEach((text) => {
       const btn = document.createElement('button');
       btn.innerHTML = text;
-      this.checkIfSpecialKey(text, btn);
+      this.markSpecialKeys(text, btn);
       nodesRow.append(btn);
     });
     return this;
   }
 
-  checkIfSpecialKey(text, btn) {
-    specialKeys.forEach((specialKey) => {
-      if (text === specialKey) {
-        switch (text) {
-          case '&uarr;':
-          case '&larr;':
-          case '&darr;':
-          case '&rarr;':
-            btn.classList.add('arrow');
-            break;
-          default:
-            btn.classList.add(text);
-        }
+  checkIfSpecial(key) {
+    return this.specialKeys.indexOf(key) !== -1;
+  }
+
+  markSpecialKeys(key, btn) {
+    if (this.checkIfSpecial(key)) {
+      switch (key) {
+        case '&uarr;':
+        case '&larr;':
+        case '&darr;':
+        case '&rarr;':
+          btn.classList.add('arrow');
+          break;
+        default:
+          btn.classList.add(key);
       }
-    });
-    return this;
+    }
+    return btn;
   }
 
   nameDoubledButtons(keyboard) {
-    doubleKeys.forEach((doubledKey) => {
+    doubledKeys.forEach((doubledKey) => {
       const firstKey = keyboard.querySelectorAll(`.${doubledKey}`)[0];
       const secondKey = keyboard.querySelectorAll(`.${doubledKey}`)[1];
       firstKey.classList.add(`${doubledKey}__left`);
@@ -415,18 +468,58 @@ class Keyboard {
     return this;
   }
 
-  addButtonsAnimation(keyboard) {
+  addClickActions(keyboard) {
     keyboard.addEventListener('click', (event) => {
-      if (
-        event.target.tagName === 'BUTTON'
-        && !event.target.classList.contains('active')
-      ) {
-        event.target.classList.add('active');
-        setTimeout(() => {
-          event.target.classList.remove('active');
-        }, 350);
+      const output = document.querySelector('textarea');
+
+      if (event.target.tagName === 'BUTTON') {
+        this.activateButton(event.target);
+        this.deactivateButton(event.target);
+
+        const key = event.target.innerText;
+        let changed = output.value;
+        if (!this.checkIfSpecial(key)) {
+          changed += key;
+        } else if (key === 'tab') {
+          changed += '\t';
+        } else if (key === 'enter') {
+          changed += '\n';
+        } else if (key === 'space') {
+          changed += ' ';
+        } else if (key === 'backspace') {
+          changed = changed.slice(0, -1);
+        }
+
+        output.value = changed;
+      }
+      output.focus();
+    });
+    return this;
+  }
+
+  addMouseActions(keyboard) {
+    keyboard.addEventListener('mousedown', (event) => {
+      if (event.target.tagName === 'BUTTON') {
+        this.activateButton(event.target);
       }
     });
+    keyboard.addEventListener('mouseup', (event) => {
+      if (event.target.tagName === 'BUTTON') {
+        this.deactivateButton(event.target);
+      }
+    });
+    return this;
+  }
+
+  activateButton(key) {
+    key.classList.add('active');
+    return this;
+  }
+
+  deactivateButton(key) {
+    setTimeout(() => {
+      key.classList.remove('active');
+    }, 250);
     return this;
   }
 }
@@ -435,16 +528,18 @@ window.onload = () => {
   // Create hint
   const hint = document.createElement('p');
   hint.innerHTML = ' Сделано на Windows: <strong>Сменить раскладку: Ctrl + Alt</strong>';
+  document.body.append(hint);
 
   // Create textarea
   const textarea = document.createElement('textarea');
   textarea.classList.add('text');
-
-  // Add hint & textarea to document
-  document.querySelector('body').append(hint, textarea);
+  document.body.append(textarea);
   textarea.focus();
 
   // Create and add keyboard to document
+  const keyboardView = document.createElement('div');
+  keyboardView.classList.add('keyboard');
+  document.body.append(keyboardView);
   const keyboard = new Keyboard();
-  document.querySelector('body').append(keyboard);
+  document.body.append(keyboard);
 };
