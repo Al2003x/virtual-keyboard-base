@@ -18,7 +18,7 @@ Layout.english = {
       '=',
       'backspace',
     ],
-    ['tab', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']'],
+    ['tab', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', 'del'],
     [
       'capslock',
       'a',
@@ -51,15 +51,13 @@ Layout.english = {
     ],
     [
       'ctrl',
-      'win',
       'alt',
       'space',
       'alt',
-      'win',
-      'ctrl',
       '&larr;',
       '&darr;',
       '&rarr;',
+      'ctrl',
     ],
   ],
   capsLockPressed: [
@@ -79,7 +77,7 @@ Layout.english = {
       '=',
       'backspace',
     ],
-    ['tab', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '[', ']'],
+    ['tab', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '[', ']', 'del'],
     [
       'capslock',
       'A',
@@ -113,15 +111,13 @@ Layout.english = {
     ],
     [
       'ctrl',
-      'win',
       'alt',
       'space',
       'alt',
-      'win',
-      'ctrl',
       '&larr;',
       '&darr;',
       '&rarr;',
+      'ctrl',
     ],
   ],
   shiftPressed: [
@@ -141,7 +137,7 @@ Layout.english = {
       '+',
       'backspace',
     ],
-    ['tab', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '{', '}'],
+    ['tab', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '{', '}', 'del'],
     [
       'capslock',
       'A',
@@ -175,15 +171,13 @@ Layout.english = {
     ],
     [
       'ctrl',
-      'win',
       'alt',
       'space',
       'alt',
-      'win',
-      'ctrl',
       '&larr;',
       '&darr;',
       '&rarr;',
+      'ctrl',
     ],
   ],
 };
@@ -206,7 +200,7 @@ Layout.russian = {
       '=',
       'backspace',
     ],
-    ['tab', 'й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ'],
+    ['tab', 'й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ', 'del'],
     [
       'capslock',
       'ф',
@@ -240,15 +234,13 @@ Layout.russian = {
     ],
     [
       'ctrl',
-      'win',
       'alt',
       'space',
       'alt',
-      'win',
-      'ctrl',
       '&larr;',
       '&darr;',
       '&rarr;',
+      'ctrl',
     ],
   ],
   capsLockPressed: [
@@ -268,7 +260,7 @@ Layout.russian = {
       '=',
       'backspace',
     ],
-    ['tab', 'Й', 'Ц', 'У', 'К', 'Е', 'Н', 'Г', 'Ш', 'Щ', 'З', 'Х', 'Ъ'],
+    ['tab', 'Й', 'Ц', 'У', 'К', 'Е', 'Н', 'Г', 'Ш', 'Щ', 'З', 'Х', 'Ъ', 'del'],
     [
       'capslock',
       'Ф',
@@ -302,15 +294,13 @@ Layout.russian = {
     ],
     [
       'ctrl',
-      'win',
       'alt',
       'space',
       'alt',
-      'win',
-      'ctrl',
       '&larr;',
       '&darr;',
       '&rarr;',
+      'ctrl',
     ],
   ],
   shiftPressed: [
@@ -330,7 +320,7 @@ Layout.russian = {
       '+',
       'backspace',
     ],
-    ['tab', 'Й', 'Ц', 'У', 'К', 'Е', 'Н', 'Г', 'Ш', 'Щ', 'З', 'Х', 'Ъ'],
+    ['tab', 'Й', 'Ц', 'У', 'К', 'Е', 'Н', 'Г', 'Ш', 'Щ', 'З', 'Х', 'Ъ', 'del'],
     [
       'capslock',
       'Ф',
@@ -364,15 +354,13 @@ Layout.russian = {
     ],
     [
       'ctrl',
-      'win',
       'alt',
       'space',
       'alt',
-      'win',
-      'ctrl',
       '&larr;',
       '&darr;',
       '&rarr;',
+      'ctrl',
     ],
   ],
 };
@@ -385,7 +373,6 @@ const SpecialKeys = [
   'shift',
   'ctrl',
   'alt',
-  'win',
   'space',
   '&uarr;',
   '&larr;',
@@ -393,7 +380,7 @@ const SpecialKeys = [
   '&rarr;',
 ];
 
-const doubledKeys = ['shift', 'alt', 'win'];
+const doubledKeys = ['shift', 'alt'];
 
 const language = 'english';
 /* const optPressed = false;
@@ -527,7 +514,7 @@ class Keyboard {
 window.onload = () => {
   // Create hint
   const hint = document.createElement('p');
-  hint.innerHTML = ' Сделано на Windows: <strong>Сменить раскладку: Ctrl + Alt</strong>';
+  hint.innerHTML = ' Сделано на Windows: <strong>Сменить раскладку: LeftShift + Alt</strong>';
   document.body.append(hint);
 
   // Create textarea
