@@ -18,7 +18,7 @@ Layout.english = {
       '=',
       'backspace',
     ],
-    ['tab', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', 'del'],
+    ['tab', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']'],
     [
       'capslock',
       'a',
@@ -49,16 +49,7 @@ Layout.english = {
       '&uarr;',
       'shift',
     ],
-    [
-      'ctrl',
-      'alt',
-      'space',
-      'alt',
-      '&larr;',
-      '&darr;',
-      '&rarr;',
-      'ctrl',
-    ],
+    ['ctrl', 'alt', 'space', 'alt', '&larr;', '&darr;', '&rarr;', 'ctrl'],
   ],
   capsLockPressed: [
     [
@@ -109,16 +100,7 @@ Layout.english = {
       '&uarr;',
       'shift',
     ],
-    [
-      'ctrl',
-      'alt',
-      'space',
-      'alt',
-      '&larr;',
-      '&darr;',
-      '&rarr;',
-      'ctrl',
-    ],
+    ['ctrl', 'alt', 'space', 'alt', '&larr;', '&darr;', '&rarr;', 'ctrl'],
   ],
   shiftPressed: [
     [
@@ -137,7 +119,7 @@ Layout.english = {
       '+',
       'backspace',
     ],
-    ['tab', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '{', '}', 'del'],
+    ['tab', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '{', '}'],
     [
       'capslock',
       'A',
@@ -169,16 +151,7 @@ Layout.english = {
       '&uarr;',
       'shift',
     ],
-    [
-      'ctrl',
-      'alt',
-      'space',
-      'alt',
-      '&larr;',
-      '&darr;',
-      '&rarr;',
-      'ctrl',
-    ],
+    ['ctrl', 'alt', 'space', 'alt', '&larr;', '&darr;', '&rarr;', 'ctrl'],
   ],
 };
 
@@ -200,7 +173,7 @@ Layout.russian = {
       '=',
       'backspace',
     ],
-    ['tab', 'й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ', 'del'],
+    ['tab', 'й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ'],
     [
       'capslock',
       'ф',
@@ -232,16 +205,7 @@ Layout.russian = {
       '&uarr;',
       'shift',
     ],
-    [
-      'ctrl',
-      'alt',
-      'space',
-      'alt',
-      '&larr;',
-      '&darr;',
-      '&rarr;',
-      'ctrl',
-    ],
+    ['ctrl', 'alt', 'space', 'alt', '&larr;', '&darr;', '&rarr;', 'ctrl'],
   ],
   capsLockPressed: [
     [
@@ -292,16 +256,7 @@ Layout.russian = {
       '&uarr;',
       'shift',
     ],
-    [
-      'ctrl',
-      'alt',
-      'space',
-      'alt',
-      '&larr;',
-      '&darr;',
-      '&rarr;',
-      'ctrl',
-    ],
+    ['ctrl', 'alt', 'space', 'alt', '&larr;', '&darr;', '&rarr;', 'ctrl'],
   ],
   shiftPressed: [
     [
@@ -320,7 +275,7 @@ Layout.russian = {
       '+',
       'backspace',
     ],
-    ['tab', 'Й', 'Ц', 'У', 'К', 'Е', 'Н', 'Г', 'Ш', 'Щ', 'З', 'Х', 'Ъ', 'del'],
+    ['tab', 'Й', 'Ц', 'У', 'К', 'Е', 'Н', 'Г', 'Ш', 'Щ', 'З', 'Х', 'Ъ'],
     [
       'capslock',
       'Ф',
@@ -352,16 +307,7 @@ Layout.russian = {
       '&uarr;',
       'shift',
     ],
-    [
-      'ctrl',
-      'alt',
-      'space',
-      'alt',
-      '&larr;',
-      '&darr;',
-      '&rarr;',
-      'ctrl',
-    ],
+    ['ctrl', 'alt', 'space', 'alt', '&larr;', '&darr;', '&rarr;', 'ctrl'],
   ],
 };
 
@@ -382,27 +328,34 @@ const SpecialKeys = [
 
 const doubledKeys = ['shift', 'alt'];
 
-const language = 'english';
-/* const optPressed = false;
+/* const language = 'english';
+const optPressed = false;
 const shiftPressed = false;
 const capsLockPressed = false; */
 
 class Keyboard {
   constructor() {
     this.layout = Layout;
-    this.language = language;
+    this.language = 'english';
+    this.shiftPressed = false;
+    this.capslockPressed = false;
+    this.addRealKeyboardActions();
     this.specialKeys = SpecialKeys;
-    return this.createKeyboard();
+    return  this.createKeyboard();
   }
 
-  createKeyboard() {
+  createKeyboard(layoutType = 'general', layoutArray = false) {
     const keyboard = document.createElement('div');
     keyboard.classList.add('keyboard');
-    const currentLayout = this.layout[language].general;
+    const currentLayout = (!layoutArray) ? this.layout[this.language][layoutType] : layoutArray;
     this.createButtons(currentLayout, keyboard);
     this.nameDoubledButtons(keyboard);
     this.addClickActions(keyboard);
     this.addMouseActions(keyboard);
+    if (document.querySelector('.keyboard') != null) {
+      document.querySelector('.keyboard').remove();
+      document.body.append(keyboard);
+    }
     return keyboard;
   }
 
@@ -433,10 +386,16 @@ class Keyboard {
     if (this.checkIfSpecial(key)) {
       switch (key) {
         case '&uarr;':
-        case '&larr;':
+          btn.classList.add('arrow', 'arrow__up');
+          break;
         case '&darr;':
+          btn.classList.add('arrow', 'arrow__down');
+          break;
+        case '&larr;':
+          btn.classList.add('arrow', 'arrow__left');
+          break;
         case '&rarr;':
-          btn.classList.add('arrow');
+          btn.classList.add('arrow', 'arrow__right');
           break;
         default:
           btn.classList.add(key);
@@ -455,44 +414,114 @@ class Keyboard {
     return this;
   }
 
-  addClickActions(keyboard) {
-    keyboard.addEventListener('click', (event) => {
-      const output = document.querySelector('textarea');
-
-      if (event.target.tagName === 'BUTTON') {
-        this.activateButton(event.target);
-        this.deactivateButton(event.target);
-
-        const key = event.target.innerText;
-        let changed = output.value;
-        if (!this.checkIfSpecial(key)) {
-          changed += key;
-        } else if (key === 'tab') {
-          changed += '\t';
-        } else if (key === 'enter') {
-          changed += '\n';
-        } else if (key === 'space') {
-          changed += ' ';
-        } else if (key === 'backspace') {
-          changed = changed.slice(0, -1);
+  addRealKeyboardActions() {
+    document.addEventListener('keydown', (realKey) => {
+      const { code } = realKey;
+      let key = realKey.key.toLocaleLowerCase();
+      if (code === 'Space') key = 'space';
+      if (key === 'control') key = 'ctrl';
+      if (key === 'alt') key = 'alt';
+      if (key === 'alt') key = (code === 'AltRight') ? 'alt__right' : 'alt__left';
+      if (key === 'arrowup') key = 'arrow__up';
+      if (key === 'arrowdown') key = 'arrow__down';
+      if (key === 'arrowleft') key = 'arrow__left';
+      if (key === 'arrowright') key = 'arrow__right';
+      if (key === 'shift') {
+        key = code === 'ShiftRight' ? 'shift__right' : 'shift__left';
+        this.switchShift(key);
+      } else if (key === 'capslock') {
+        this.switchCapslock();
+      } else {
+        const downKey = Array.from(document.querySelectorAll('button')).find(
+          (e) => e.textContent.toLowerCase() === key || e.classList.contains(key),
+        );
+        if (downKey !== undefined) {
+          this.activateButton(downKey);
+          this.deactivateButton(downKey);
         }
-
-        output.value = changed;
       }
-      output.focus();
+    });
+    document.addEventListener('keyup', (realKey) => {
+      let key = realKey.key.toLocaleLowerCase();
+      const { code } = realKey;
+      if (key === 'capslock') this.switchCapslock();
+      if (key === 'shift') {
+        key = code === 'ShiftRight' ? 'shift__right' : 'shift__left';
+        this.switchShift(key);
+      }
     });
     return this;
+  }
+
+  addClickActions(keyboard) {
+    keyboard.addEventListener('click', (event) => {
+      const textarea = document.querySelector('textarea');
+      if (event.target.tagName === 'BUTTON') {
+        textarea.value = this.changeTextareaValue(
+          event.target.innerText,
+          textarea.value,
+        );
+      }
+    });
+    return this;
+  }
+
+  changeTextareaValue(key, current) {
+    let changed = current;
+    if (!this.checkIfSpecial(key)) changed += key;
+    else if (key === 'tab') changed += '\t';
+    else if (key === 'enter') changed += '\n';
+    else if (key === 'space') changed += ' ';
+    else if (key === 'backspace') changed = changed.slice(0, -1);
+    return changed;
+  }
+
+  switchShift(shiftClass) {
+    if (this.shiftPressed) {
+      this.createKeyboard();
+      this.deactivateButton(document.querySelector(`.${shiftClass}`));
+      this.shiftPressed = false;
+    } else {
+      this.createKeyboard('shiftPressed');
+      this.activateButton(document.querySelector(`.${shiftClass}`));
+      this.shiftPressed = true;
+    }
+    return document.querySelector(`.${shiftClass}`);
+  }
+
+  switchCapslock() {
+    const { general } = this.layout[this.language];
+    const layout = general.map((row) => row.map((k) => ((k.length === 1) ? k.toUpperCase() : k)));
+    if (this.capsLockPressed) {
+      this.createKeyboard();
+      this.deactivateButton(document.querySelector('.capslock'));
+      this.capsLockPressed = false;
+    } else {
+      this.createKeyboard('', layout);
+      this.activateButton(document.querySelector('.capslock'));
+      this.capsLockPressed = true;
+    }
   }
 
   addMouseActions(keyboard) {
     keyboard.addEventListener('mousedown', (event) => {
       if (event.target.tagName === 'BUTTON') {
-        this.activateButton(event.target);
+        if (event.target.innerText === 'shift') {
+          this.switchShift(event.target.classList[1]);
+        } else if (event.target.innerText === 'capslock') {
+          this.switchCapslock();
+        } else {
+          this.activateButton(event.target);
+        }
       }
     });
     keyboard.addEventListener('mouseup', (event) => {
       if (event.target.tagName === 'BUTTON') {
-        this.deactivateButton(event.target);
+        if (event.target.innerText === 'shift') {
+          this.switchShift(event.target.classList[1]);
+        } else if (event.target.innerText !== 'capslock') {
+          this.deactivateButton(event.target);
+        }
       }
     });
     return this;
@@ -506,7 +535,7 @@ class Keyboard {
   deactivateButton(key) {
     setTimeout(() => {
       key.classList.remove('active');
-    }, 250);
+    }, 200);
     return this;
   }
 }
