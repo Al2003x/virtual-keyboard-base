@@ -1,4 +1,6 @@
-const Layout = {};
+import KEYS from './keys.js';
+
+/* const Layout = {};
 
 Layout.english = {
   general: [
@@ -32,6 +34,7 @@ Layout.english = {
       'l',
       ';',
       '&#39;',
+      '|',
       'enter',
     ],
     [
@@ -50,8 +53,8 @@ Layout.english = {
       'shift',
     ],
     ['ctrl', 'alt', 'space', 'alt', '&larr;', '&darr;', '&rarr;', 'ctrl'],
-  ],
-  capsLockPressed: [
+  ], */
+/* capslockPressed: [
     [
       '`',
       '1',
@@ -101,8 +104,8 @@ Layout.english = {
       'shift',
     ],
     ['ctrl', 'alt', 'space', 'alt', '&larr;', '&darr;', '&rarr;', 'ctrl'],
-  ],
-  shiftPressed: [
+  ], */
+/* shiftPressed: [
     [
       '~',
       '!',
@@ -188,6 +191,7 @@ Layout.russian = {
       'ж',
       'э',
       '&#92;',
+      '|',
       'enter',
     ],
     [
@@ -206,8 +210,8 @@ Layout.russian = {
       'shift',
     ],
     ['ctrl', 'alt', 'space', 'alt', '&larr;', '&darr;', '&rarr;', 'ctrl'],
-  ],
-  capsLockPressed: [
+  ], */
+/*  capslockPressed: [
     [
       'Ё',
       '1',
@@ -257,8 +261,8 @@ Layout.russian = {
       'shift',
     ],
     ['ctrl', 'alt', 'space', 'alt', '&larr;', '&darr;', '&rarr;', 'ctrl'],
-  ],
-  shiftPressed: [
+  ], */
+/* shiftPressed: [
     [
       'Ё',
       '!',
@@ -326,233 +330,232 @@ const SpecialKeys = [
   '&rarr;',
 ];
 
-const doubledKeys = ['shift', 'alt'];
-
-/* const language = 'english';
-const optPressed = false;
-const shiftPressed = false;
-const capsLockPressed = false; */
-
-class Keyboard {
-  constructor() {
-    this.layout = Layout;
-    this.language = 'english';
-    this.shiftPressed = false;
-    this.capslockPressed = false;
-    this.addRealKeyboardActions();
-    this.specialKeys = SpecialKeys;
-    return  this.createKeyboard();
-  }
-
-  createKeyboard(layoutType = 'general', layoutArray = false) {
-    const keyboard = document.createElement('div');
-    keyboard.classList.add('keyboard');
-    const currentLayout = (!layoutArray) ? this.layout[this.language][layoutType] : layoutArray;
-    this.createButtons(currentLayout, keyboard);
-    this.nameDoubledButtons(keyboard);
-    this.addClickActions(keyboard);
-    this.addMouseActions(keyboard);
-    if (document.querySelector('.keyboard') != null) {
-      document.querySelector('.keyboard').remove();
-      document.body.append(keyboard);
-    }
-    return keyboard;
-  }
-
-  createButtons(array, keyboard) {
-    array.forEach((arrayRow) => {
-      const nodesRow = document.createElement('div');
-      nodesRow.classList.add('keyboard__row');
-      this.createButton(arrayRow, nodesRow);
-      keyboard.append(nodesRow);
-    });
-  }
-
-  createButton(arrayRow, nodesRow) {
-    arrayRow.forEach((text) => {
-      const btn = document.createElement('button');
-      btn.innerHTML = text;
-      this.markSpecialKeys(text, btn);
-      nodesRow.append(btn);
-    });
-    return this;
-  }
-
-  checkIfSpecial(key) {
-    return this.specialKeys.indexOf(key) !== -1;
-  }
-
-  markSpecialKeys(key, btn) {
-    if (this.checkIfSpecial(key)) {
-      switch (key) {
-        case '&uarr;':
-          btn.classList.add('arrow', 'arrow__up');
-          break;
-        case '&darr;':
-          btn.classList.add('arrow', 'arrow__down');
-          break;
-        case '&larr;':
-          btn.classList.add('arrow', 'arrow__left');
-          break;
-        case '&rarr;':
-          btn.classList.add('arrow', 'arrow__right');
-          break;
-        default:
-          btn.classList.add(key);
-      }
-    }
-    return btn;
-  }
-
-  nameDoubledButtons(keyboard) {
-    doubledKeys.forEach((doubledKey) => {
-      const firstKey = keyboard.querySelectorAll(`.${doubledKey}`)[0];
-      const secondKey = keyboard.querySelectorAll(`.${doubledKey}`)[1];
-      firstKey.classList.add(`${doubledKey}__left`);
-      secondKey.classList.add(`${doubledKey}__right`);
-    });
-    return this;
-  }
-
-  addRealKeyboardActions() {
-    document.addEventListener('keydown', (realKey) => {
-      const { code } = realKey;
-      let key = realKey.key.toLocaleLowerCase();
-      if (code === 'Space') key = 'space';
-      if (key === 'control') key = 'ctrl';
-      if (key === 'alt') key = 'alt';
-      if (key === 'alt') key = (code === 'AltRight') ? 'alt__right' : 'alt__left';
-      if (key === 'arrowup') key = 'arrow__up';
-      if (key === 'arrowdown') key = 'arrow__down';
-      if (key === 'arrowleft') key = 'arrow__left';
-      if (key === 'arrowright') key = 'arrow__right';
-      if (key === 'shift') {
-        key = code === 'ShiftRight' ? 'shift__right' : 'shift__left';
-        this.switchShift(key);
-      } else if (key === 'capslock') {
-        this.switchCapslock();
-      } else {
-        const downKey = Array.from(document.querySelectorAll('button')).find(
-          (e) => e.textContent.toLowerCase() === key || e.classList.contains(key),
-        );
-        if (downKey !== undefined) {
-          this.activateButton(downKey);
-          this.deactivateButton(downKey);
-        }
-      }
-    });
-    document.addEventListener('keyup', (realKey) => {
-      let key = realKey.key.toLocaleLowerCase();
-      const { code } = realKey;
-      if (key === 'capslock') this.switchCapslock();
-      if (key === 'shift') {
-        key = code === 'ShiftRight' ? 'shift__right' : 'shift__left';
-        this.switchShift(key);
-      }
-    });
-    return this;
-  }
-
-  addClickActions(keyboard) {
-    keyboard.addEventListener('click', (event) => {
-      const textarea = document.querySelector('textarea');
-      if (event.target.tagName === 'BUTTON') {
-        textarea.value = this.changeTextareaValue(
-          event.target.innerText,
-          textarea.value,
-        );
-      }
-    });
-    return this;
-  }
-
-  changeTextareaValue(key, current) {
-    let changed = current;
-    if (!this.checkIfSpecial(key)) changed += key;
-    else if (key === 'tab') changed += '\t';
-    else if (key === 'enter') changed += '\n';
-    else if (key === 'space') changed += ' ';
-    else if (key === 'backspace') changed = changed.slice(0, -1);
-    return changed;
-  }
-
-  switchShift(shiftClass) {
-    if (this.shiftPressed) {
-      this.createKeyboard();
-      this.deactivateButton(document.querySelector(`.${shiftClass}`));
-      this.shiftPressed = false;
-    } else {
-      this.createKeyboard('shiftPressed');
-      this.activateButton(document.querySelector(`.${shiftClass}`));
-      this.shiftPressed = true;
-    }
-    return document.querySelector(`.${shiftClass}`);
-  }
-
-  switchCapslock() {
-    const { general } = this.layout[this.language];
-    const layout = general.map((row) => row.map((k) => ((k.length === 1) ? k.toUpperCase() : k)));
-    if (this.capsLockPressed) {
-      this.createKeyboard();
-      this.deactivateButton(document.querySelector('.capslock'));
-      this.capsLockPressed = false;
-    } else {
-      this.createKeyboard('', layout);
-      this.activateButton(document.querySelector('.capslock'));
-      this.capsLockPressed = true;
-    }
-  }
-
-  addMouseActions(keyboard) {
-    keyboard.addEventListener('mousedown', (event) => {
-      if (event.target.tagName === 'BUTTON') {
-        if (event.target.innerText === 'shift') {
-          this.switchShift(event.target.classList[1]);
-        } else if (event.target.innerText === 'capslock') {
-          this.switchCapslock();
-        } else {
-          this.activateButton(event.target);
-        }
-      }
-    });
-    keyboard.addEventListener('mouseup', (event) => {
-      if (event.target.tagName === 'BUTTON') {
-        if (event.target.innerText === 'shift') {
-          this.switchShift(event.target.classList[1]);
-        } else if (event.target.innerText !== 'capslock') {
-          this.deactivateButton(event.target);
-        }
-      }
-    });
-    return this;
-  }
-
-  activateButton(key) {
-    key.classList.add('active');
-    return this;
-  }
-
-  deactivateButton(key) {
-    setTimeout(() => {
-      key.classList.remove('active');
-    }, 200);
-    return this;
-  }
-}
-
+const doubledKeys = ['shift', 'alt']; */
 window.onload = () => {
-  // Create hint
   const hint = document.createElement('p');
-  hint.innerHTML = ' Сделано на Windows: <strong>Сменить раскладку: LeftShift + Alt</strong>';
+  hint.innerHTML = ' Сделано на Windows: <strong>Сменить раскладку: LeftCtrl + LeftShift </strong>';
   document.body.append(hint);
-
-  // Create textarea
   const textarea = document.createElement('textarea');
   textarea.classList.add('text');
   document.body.append(textarea);
   textarea.focus();
+  textarea.addEventListener('blur', () => textarea.focus);
 
-  // Create and add keyboard to document
-  const keyboard = new Keyboard();
-  document.body.append(keyboard);
+  const keyboardView = document.createElement('div');
+  keyboardView.classList.add('keyboard');
+  document.body.append(keyboardView);
+
+  class Keyboard {
+    constructor(keys) {
+      this.language = this.getLanguage();
+      this.keys = keys;
+      this.shiftPressed = false;
+      this.capslockPressed = false;
+      this.ctrlPressed = false;
+      this.createKeyboard();
+    }
+
+    createKeyboard() {
+      let currentRow;
+      this.keys.forEach((key) => {
+        if (currentRow !== key.row) {
+          const row = document.createElement('div');
+          row.classList.add('keyboard__row');
+          keyboardView.append(row);
+          currentRow = key.row;
+        }
+        const button = document.createElement('button');
+        button.id = key.code;
+        button.classList = key.classes !== undefined ? key.classes : '';
+        button.innerHTML = key.isSpecial ? key.name : key[this.language];
+
+        keyboardView.querySelectorAll('.keyboard__row')[currentRow].append(button);
+      });
+    }
+
+    updateButtons() {
+      const buttons = document.querySelectorAll('button');
+      buttons.forEach((button) => {
+        const data = this.getButtonInfo(button);
+        if (!data.isSpecial) {
+          let updated = button.innerHTML;
+
+          if (this.shiftPressed) updated = data[`${this.language}Shift`];
+          else if (this.capslockPressed) updated = data[this.language].toUpperCase();
+          else updated = data[this.language];
+
+          document.querySelector(`#${data.code}`).innerHTML = updated;
+        }
+      });
+    }
+
+    setLanguage(language = this.language) {
+      localStorage.setItem('language', language);
+      return this;
+    }
+
+    getLanguage() {
+      let currentLanguage = 'en';
+      if (localStorage.getItem('language') === null) {
+        this.setLanguage(currentLanguage);
+      } else {
+        currentLanguage = localStorage.getItem('language');
+      }
+      return currentLanguage;
+    }
+
+    switchLanguage() {
+      if (this.shiftPressed && this.ctrlPressed) {
+        this.language = this.language === 'en' ? 'ru' : 'en';
+        this.setLanguage(this.language);
+      }
+    }
+
+    switchShift(shift) {
+      if (shift.id === 'ShiftRight' || shift.id === 'ShiftLeft') {
+        this.shiftPressed = !this.shiftPressed;
+        this.updateButtons();
+      }
+    }
+
+    switchCapslock(capslock) {
+      if (capslock.id === 'CapsLock') {
+        this.capslockPressed = !this.capslockPressed;
+        this.updateButtons();
+      }
+    }
+
+    getButtonInfo(button) {
+      return this.keys.filter((key) => key.code === button.id)[0];
+    }
+
+    updateTextarea(button) {
+      const btn = this.getButtonInfo(button);
+
+      let newValue = textarea.value;
+      if (btn.isSpecial) {
+        newValue = btn.changeWith !== undefined ? btn.changeWith(newValue) : newValue;
+      } else if (this.shiftPressed) {
+        newValue += btn[`${this.language}Shift`];
+      } else if (this.capslockPressed) {
+        newValue += btn[this.language].toUpperCase();
+      } else {
+        newValue += btn[this.language];
+      }
+      textarea.value = newValue;
+    }
+
+    activateButton(code) {
+      if (keyboardView.querySelector(`#${code}`) !== null) {
+        keyboardView.querySelector(`#${code}`).classList.add('active');
+      }
+      return this;
+    }
+
+    deactivateButton(code) {
+      if (keyboardView.querySelector(`#${code}`) !== null) {
+        setTimeout(() => {
+          keyboardView.querySelector(`#${code}`).classList.remove('active');
+        }, 150);
+      }
+      return this;
+    }
+
+    deactivateAllButtons() {
+      const activated = keyboardView.querySelectorAll('.active');
+      activated.forEach((button) => {
+        if (
+          button.id !== 'CapsLock'
+          && button.id !== 'ShiftRight'
+          && button.id !== 'ShiftLeft'
+        ) {
+          this.deactivateButton(button.id);
+        }
+      });
+    }
+  }
+
+  const keyboard = new Keyboard(KEYS);
+  const isButton = (element) => element.tagName === 'BUTTON';
+  document.addEventListener('mousedown', (event) => {
+    if (isButton(event.target)) {
+      if (event.target.id !== 'CapsLock') {
+        keyboard.activateButton(event.target.id);
+        keyboard.updateTextarea(event.target);
+      }
+      keyboard.switchShift(event.target);
+      if (event.target.id === 'ControlLeft') {
+        keyboard.ctrlPressed = true;
+      }
+      keyboard.switchLanguage();
+    }
+  });
+
+  document.addEventListener('mouseup', (event) => {
+    if (isButton(event.target)) {
+      if (event.target.id !== 'CapsLock') {
+        keyboard.deactivateButton(event.target.id);
+      }
+      keyboard.switchShift(event.target);
+      if (event.target.id === 'ControlLeft') {
+        keyboard.ctrlPressed = false;
+      }
+    }
+  });
+
+  document.addEventListener('click', (event) => {
+    keyboard.deactivateAllButtons();
+    keyboard.switchCapslock(event.target);
+
+    if (event.target.id === 'CapsLock') {
+      if (event.target.classList.contains('active')) {
+        keyboard.deactivateButton(event.target.id);
+      } else {
+        keyboard.activateButton(event.target.id);
+      }
+    }
+  });
+
+  document.addEventListener('keydown', (event) => {
+    event.preventDefault();
+    const virtualButton = document.querySelector(`#${event.code}`);
+    keyboard.updateTextarea(virtualButton);
+
+    keyboard.activateButton(event.code);
+
+    keyboard.switchShift(virtualButton);
+
+    if (event.code === 'CapsLock') {
+      keyboard.switchCapslock(virtualButton);
+    }
+
+    if (event.code === 'ControlLeft') {
+      keyboard.ctrlPressed = true;
+    }
+
+    keyboard.switchLanguage();
+  });
+
+  document.addEventListener('keyup', (event) => {
+    const virtualButton = document.querySelector(`#${event.code}`);
+
+    keyboard.switchShift(virtualButton);
+
+    if (event.code === 'CapsLock') {
+      keyboard.switchCapslock(virtualButton);
+      keyboard.deactivateButton(event.code);
+    } else if (event.code === 'ShiftLeft' || event.code === 'ShiftRight') {
+      keyboard.deactivateAllButtons();
+      keyboard.deactivateButton(event.code);
+    } else {
+      keyboard.deactivateAllButtons();
+    }
+
+    if (event.code === 'ControlLeft') {
+      keyboard.ctrlPressed = false;
+    }
+  });
+
+  textarea.focus();
+  textarea.addEventListener('blur', () => textarea.focus());
 };
