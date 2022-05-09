@@ -498,7 +498,7 @@ button.active {
 
 .text:focus {
   border: 3px solid #00ff00;
-  padding: 11px;
+  padding: 10px;
   outline: none;
   background: #FAFAFA;
 }
